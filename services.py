@@ -1,4 +1,18 @@
 from utils import *
+def print_avrtpr_last7days(data):
+    print("Cities : ")
+    city_map={}
+    for i ,city_name in emurate(data['cities']):
+        city_map[i]=city_name
+        print(f"{i} : {city_name}")
+    choice =int(input("Select the city you want to see the average temperature for the last 7 days :"))
+    selected_city=city_map.get(choice)
+    if selected_city:
+        history= data["cities"][selected_city]["last_7_days_history"]
+        avg = calculate_avr_temperature(history)
+        print(f"Avrage last 7 days: {avg}")
+    else:
+        print("Invalid Choice")
 def cout_all_city(data):
     print("All-City-Information")
 
