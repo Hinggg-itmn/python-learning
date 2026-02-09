@@ -1,4 +1,5 @@
 from datetime import datetime,timedelta,timezone
+import json
 def age_classification(age):
     if age < 13:
         return"Children"
@@ -8,6 +9,12 @@ def age_classification(age):
         return "Adolescent"
     else:
         return"Old"
+def load_data(path: str):
+    with open(path,"r",encoding="utf-8" ) as f:
+        return json.load(f)
+def save_data(data:dict,path:str):
+    with open(path,"w",encoding="utf-8") as f:
+        json.dump(data,f,indent=4,ensure_ascii=False)
 def calculate_avr_temperature(list_temperature):
     if len(list_temperature) ==0:
         return 0
