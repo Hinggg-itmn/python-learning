@@ -42,8 +42,18 @@ def convert_temperature(temp, from_unit, to_unit):
 
     if from_unit == "C" and to_unit == "F":
         return temp * 1.8 + 32
-
+def print_city_card(name, info):
+    """This function is specifically for printing city 
+    information for aesthetic purposes."""
+    print(f"\n CITY: {name.upper()}")
+    print(f"   ------------------------------")
+    print(f"   🌡️  TEMPERATURE: {info['current_temperature']}°{info['unit']}")
+    print(f"   🌍  COORDINATES:  {info['coordinates_and_timezone'][0]}, {info['coordinates_and_timezone'][1]}")
+    print(f"   🕒  TIME ZONE: {info['coordinates_and_timezone'][2]}")
+    print(f"   ------------------------------")
     raise ValueError("Invalid unit")
+def check_city_in_data(name, data):
+    return name in data['cities']
 def update_info_user(data):
     name=input("Your Name: ").strip()
     if name:
@@ -65,3 +75,33 @@ def update_info_user(data):
     if unit in ["C","F"]:
         data["user"]["preferred_temperature_unit"] = unit
     return True
+def delete_city(data):
+    print("\n Delete city ")
+    name = input("Your city name which you want delete: ").strip()
+    if check_city_in_data(name,data) is True:
+        confirm=input(f"Are you want to delete {name}? (y/n): ").lower()
+        if confirm == 'y':
+            data['cities'].pop(name)
+            save_data(data,'data.json')
+            print(f"The {name}city is deleted")
+        else:
+            print("Cancel the operation")
+    else:
+        print(f"The {name} does not exits.")
+def update_city_temperature(data):
+    print("\n Update Temperature")
+    name = input("Enter the name of the city to be updated: ").strip()
+    if check_city_in_data(name,data) is False:
+        print(f"The cities not in data {name}")
+        return
+    try:
+        new_temp=float(input(f"New temperature {name}: "))
+        data['cities'][name]['current_temperature'] = new_temp
+        history =data['cities'][name]['last_7_days_history']
+        history.pop(0)
+        history.append(new_temp)
+        save_data(data,'data.json')
+        print(f"Updated data for {name}")
+    except ValueError:
+        print("Error: The temperature must be interger!") 
+        
