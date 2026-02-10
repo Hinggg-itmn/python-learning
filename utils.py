@@ -42,6 +42,7 @@ def convert_temperature(temp, from_unit, to_unit):
 
     if from_unit == "C" and to_unit == "F":
         return temp * 1.8 + 32
+    raise ValueError("Invalid unit")
 def print_city_card(name, info):
     """This function is specifically for printing city 
     information for aesthetic purposes."""
@@ -51,7 +52,6 @@ def print_city_card(name, info):
     print(f"   🌍  COORDINATES:  {info['coordinates_and_timezone'][0]}, {info['coordinates_and_timezone'][1]}")
     print(f"   🕒  TIME ZONE: {info['coordinates_and_timezone'][2]}")
     print(f"   ------------------------------")
-    raise ValueError("Invalid unit")
 def check_city_in_data(name, data):
     return name in data['cities']
 def update_info_user(data):
