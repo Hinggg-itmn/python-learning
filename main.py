@@ -29,18 +29,23 @@ def main():
             cout_all_city(city_data)
         elif choice =='3':
             #SEARCH
+            search_city(data)
             pass
         elif choice=='4':
             #ADDNEWCITY
+            add_new_city(data)
             pass
         elif choice=='5':
             #update city temperature
+            update_city_temperature(data)
             pass
         elif choice =='6':
             #Delete city
+            delete_city(data)
             pass
         elif choice =='7':
             #update user info
+            update_info_user(data)
             pass
         elif choice =='8':
             print("The console is closing.....See Yah!")
