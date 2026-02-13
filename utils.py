@@ -1,5 +1,21 @@
 from datetime import datetime,timedelta,timezone
 import json
+import csv
+import re 
+#VALIDATE NUMBER
+def validate_temperature(temp,unit):
+    unit=unit.upper()
+    if unit =="C":
+        return -50 <= temp<=60
+    elif unit=="F":
+        return -60 <=temp<=140
+    return False
+def validate_coordiantes(lat,lon):
+    return (-90 <= lat<=90) and (-180 <= lon <= 180)
+def validate_city_name(name):
+    if not name or not (2<len(name.strip())<=0):
+        return False
+    return bool(re.fullmatch(r"[A-Za-zÀ-ÿ\s]+", name))
 def age_classification(age):
     if age < 13:
         return"Children"
@@ -36,10 +52,8 @@ def calculate_age(year_born,month_born,day_born):
 def convert_temperature(temp, from_unit, to_unit):
     if from_unit == to_unit:
         return temp
-
     if from_unit == "F" and to_unit == "C":
         return (temp - 32) / 1.8
-
     if from_unit == "C" and to_unit == "F":
         return temp * 1.8 + 32
     raise ValueError("Invalid unit")
@@ -88,6 +102,15 @@ def delete_city(data):
             print("Cancel the operation")
     else:
         print(f"The {name} does not exits.")
+def export_to_csv(path:str):
+    with open(path,mode = 'w',newline='',encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerow(['City', 'Temperature', 'Unit', 'Avg_7days', 'Lat', 'Lon', 'Timezone'])
+        for city,info in data['cities'].item():
+            avg_7days=calculate_avr_temperature(info['last_7_days_history'])
+            lat,lon,timezone=info['coordinates_and_timezone']
+            
+    print(f"{path} conversion to csv was succesfully ")
 def update_city_temperature(data):
     print("\n Update Temperature")
     name = input("Enter the name of the city to be updated: ").strip()
