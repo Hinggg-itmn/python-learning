@@ -21,7 +21,7 @@
       "last_7_days_history": [31, 32, 33, 32, 31, 32, 33],
       "coordinates_and_timezone": [10.8231, 106.6297, "GMT+7"]
     },
-    "New York": {
+    "NewYork": {
       "current_temperature": 65,
       "unit": "F",
       "last_7_days_history": [60, 62, 65, 68, 70, 65, 63],

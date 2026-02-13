@@ -17,7 +17,7 @@ def main():
     now = datetime.now()
     print(f"--Day, Month, Year: {now.strftime('%d/%m/%Y')}")
     try :
-        load_data(data.json)
+        load_data("data.json")
     except FileNotFoundError:
         print("Error: data.json was not found!")
         return

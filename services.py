@@ -2,7 +2,7 @@ from utils import *
 def print_avrtpr_last7days(data):
     print("Cities : ")
     city_map={}
-    for i ,city_name in emurate(data['cities']):
+    for i ,city_name in enumerate(data['cities']):
         city_map[i]=city_name
         print(f"{i} : {city_name}")
     choice =int(input("Select the city you want to see the average temperature for the last 7 days :"))
