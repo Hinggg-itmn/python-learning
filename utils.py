@@ -13,7 +13,7 @@ def validate_temperature(temp,unit):
 def validate_coordiantes(lat,lon):
     return (-90 <= lat<=90) and (-180 <= lon <= 180)
 def validate_city_name(name):
-    if not name or not (2<len(name.strip())<=0):
+    if not name or not (2<=len(name.strip())<=0):
         return False
     return bool(re.fullmatch(r"[A-Za-zÀ-ÿ\s]+", name))
 def age_classification(age):
@@ -66,6 +66,7 @@ def print_city_card(name, info):
     print(f"   🌍  COORDINATES:  {info['coordinates_and_timezone'][0]}, {info['coordinates_and_timezone'][1]}")
     print(f"   🕒  TIME ZONE: {info['coordinates_and_timezone'][2]}")
     print(f"   ------------------------------")
+#CHECK
 def check_city_in_data(name, data):
     return name in data['cities']
 def update_info_user(data):

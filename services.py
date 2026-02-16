@@ -1,4 +1,27 @@
 from utils import *
+def check_weather_alert(data):
+    print("WEATHER_ALERT")
+    has_alert = False
+    for city_name,info in data['cities'].item():
+        alert=[]
+        temp_c=info["current_temperature"]
+        if info["unit"]=="F":
+            temp_c=convert_temperature(temp_c,"F","C")
+        if temp_c>35:
+            alert.append("Hot weather")
+        elif temp <10:
+            alert.append("Cold Weahter")
+        history=info.get("last_7_day_history",[])
+        if len(history) >=2:
+            max_h=max(history)
+            min_h=min(history)
+            if max_h - min_h > 10:
+                alert.append("Unstable weather")
+        if alert:
+            has_alert=True
+            print(f" City : {city_name}")
+            for msg in alert:
+                print(f"- {msg}")
 def print_avrtpr_last7days(data):
     print("Cities : ")
     city_map={}
