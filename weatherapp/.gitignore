@@ -1,0 +1,11 @@
+# Bỏ qua các file rác của Python
+__pycache__/
+*.py[cod]
+
+# Bỏ qua file môi trường ảo (nếu bạn có dùng)
+venv/
+.env
+
+# Bỏ qua các file tạm của hệ điều hành
+.DS_Store
+Thumbs.db
